@@ -7,6 +7,11 @@
 <title>AVENGERS: DOOMSDAY</title>
 
 <style>
+
+/* =====================================================
+   RESET
+===================================================== */
+
 * {
     margin: 0;
     padding: 0;
@@ -19,50 +24,198 @@ html {
 
 body {
     font-family: Arial, Helvetica, sans-serif;
-    background: #020704;
+    background: #010603;
     color: white;
     overflow-x: hidden;
 }
 
-/* ================= BACKGROUND ================= */
+
+/* =====================================================
+   LOADING / INTRO SCREEN
+===================================================== */
+
+#intro {
+    position: fixed;
+    inset: 0;
+
+    background:
+        radial-gradient(
+            circle,
+            rgba(0,255,80,0.12),
+            #010603 65%
+        );
+
+    z-index: 9999;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    text-align: center;
+
+    transition:
+        opacity 1s ease,
+        visibility 1s ease;
+}
+
+#intro.hide {
+    opacity: 0;
+    visibility: hidden;
+}
+
+.intro-content {
+    animation: introZoom 2s ease;
+}
+
+.intro-small {
+    color: #5cff89;
+
+    font-size: 12px;
+    letter-spacing: 7px;
+
+    margin-bottom: 25px;
+
+    text-shadow:
+        0 0 15px #00ff55;
+}
+
+.intro-title {
+    font-size: clamp(55px, 13vw, 150px);
+
+    font-weight: 1000;
+
+    line-height: .8;
+
+    text-shadow:
+        0 0 10px #00ff55,
+        0 0 30px #00ff55,
+        0 0 80px rgba(0,255,80,.7);
+}
+
+.intro-title span {
+    display: block;
+    color: #55ff84;
+}
+
+.loading {
+    margin-top: 45px;
+
+    color: #7a9c83;
+
+    font-size: 11px;
+
+    letter-spacing: 4px;
+}
+
+.loading-line {
+    width: 220px;
+    height: 2px;
+
+    background: #16351f;
+
+    margin: 15px auto;
+
+    overflow: hidden;
+}
+
+.loading-line::after {
+    content: "";
+
+    display: block;
+
+    width: 50%;
+
+    height: 100%;
+
+    background: #55ff84;
+
+    box-shadow:
+        0 0 15px #00ff55;
+
+    animation: loading 1.5s infinite;
+}
+
+@keyframes loading {
+
+    from {
+        transform: translateX(-100%);
+    }
+
+    to {
+        transform: translateX(300%);
+    }
+
+}
+
+@keyframes introZoom {
+
+    from {
+        transform: scale(.8);
+        opacity: 0;
+    }
+
+    to {
+        transform: scale(1);
+        opacity: 1;
+    }
+
+}
+
+
+/* =====================================================
+   BACKGROUND
+===================================================== */
 
 .background {
     position: fixed;
+
     inset: 0;
+
     z-index: -5;
 
     background:
         linear-gradient(
-            rgba(0, 10, 4, 0.48),
-            rgba(0, 5, 2, 0.92)
+            rgba(0,12,5,.48),
+            rgba(0,5,2,.94)
         ),
         url("avengers-bg.jpg");
 
     background-size: cover;
+
     background-position: center;
+
     background-repeat: no-repeat;
 }
 
 .glow {
     position: fixed;
+
     inset: 0;
+
     z-index: -4;
+
     pointer-events: none;
 
     background:
         radial-gradient(
-            circle at 50% 40%,
-            rgba(0, 255, 80, 0.2),
+            circle at 50% 35%,
+            rgba(0,255,80,.2),
             transparent 45%
         );
 }
 
-/* ================= PARTICLES ================= */
+
+/* =====================================================
+   PARTICLES
+===================================================== */
 
 .particles {
     position: fixed;
+
     inset: 0;
+
     z-index: -2;
+
     pointer-events: none;
 }
 
@@ -72,17 +225,21 @@ body {
     width: 3px;
     height: 3px;
 
-    background: #62ff8c;
     border-radius: 50%;
 
-    box-shadow: 0 0 12px #00ff55;
+    background: #5cff88;
 
-    animation: float 7s linear infinite;
+    box-shadow:
+        0 0 12px #00ff55;
+
+    animation:
+        particleFloat 7s linear infinite;
 }
 
-@keyframes float {
+@keyframes particleFloat {
+
     from {
-        transform: translateY(100vh);
+        transform: translateY(110vh);
         opacity: 0;
     }
 
@@ -98,12 +255,17 @@ body {
         transform: translateY(-10vh);
         opacity: 0;
     }
+
 }
 
-/* ================= NAV ================= */
+
+/* =====================================================
+   NAVIGATION
+===================================================== */
 
 nav {
     position: absolute;
+
     top: 0;
     left: 0;
 
@@ -112,72 +274,84 @@ nav {
     padding: 25px 7%;
 
     display: flex;
+
     justify-content: space-between;
+
     align-items: center;
 
-    z-index: 20;
+    z-index: 100;
 }
 
 .logo {
-    font-size: 24px;
-    font-weight: 1000;
-    letter-spacing: 3px;
+    color: #60ff8b;
 
-    color: #63ff8c;
+    font-size: 23px;
+
+    font-weight: 1000;
+
+    letter-spacing: 3px;
 
     text-shadow:
         0 0 10px #00ff55,
-        0 0 30px #00ff55;
+        0 0 25px #00ff55;
 }
 
 nav a {
     color: white;
+
     text-decoration: none;
 
-    margin-left: 30px;
+    margin-left: 28px;
 
-    font-size: 14px;
+    font-size: 13px;
+
     font-weight: bold;
-    letter-spacing: 1px;
 
-    transition: 0.3s;
+    transition: .3s;
 }
 
 nav a:hover {
-    color: #5dff8a;
+    color: #55ff84;
 
     text-shadow:
         0 0 15px #00ff55;
 }
 
-/* ================= HERO ================= */
+
+/* =====================================================
+   HERO
+===================================================== */
 
 .hero {
     min-height: 100vh;
 
     display: flex;
-    justify-content: center;
+
     align-items: center;
+
+    justify-content: center;
 
     text-align: center;
 
-    padding: 100px 20px 70px;
+    padding: 120px 20px 80px;
 
     position: relative;
 }
 
 .hero-content {
-    max-width: 1100px;
     width: 100%;
+
+    max-width: 1100px;
 }
 
 .mini-title {
-    color: #62ff8c;
+    color: #60ff8b;
 
-    font-size: 14px;
-    font-weight: bold;
+    font-size: 13px;
 
     letter-spacing: 7px;
+
+    font-weight: bold;
 
     margin-bottom: 25px;
 
@@ -188,24 +362,22 @@ nav a:hover {
 h1 {
     font-size: clamp(60px, 12vw, 150px);
 
-    line-height: 0.82;
+    line-height: .82;
 
     font-weight: 1000;
 
     letter-spacing: -7px;
 
-    text-transform: uppercase;
-
     text-shadow:
         0 0 10px #00ff55,
         0 0 30px #00ff55,
-        0 0 70px rgba(0,255,80,0.5);
+        0 0 80px rgba(0,255,80,.6);
 }
 
 h1 span {
     display: block;
 
-    color: #53ff82;
+    color: #55ff84;
 
     margin-top: 15px;
 }
@@ -215,19 +387,23 @@ h1 span {
 
     margin: 35px auto;
 
-    color: #d4e8d9;
+    color: #d0e5d6;
 
     font-size: 18px;
 
     line-height: 1.7;
 }
 
-/* ================= COUNTDOWN ================= */
+
+/* =====================================================
+   COUNTDOWN
+===================================================== */
 
 .countdown {
     display: grid;
 
-    grid-template-columns: repeat(4, 1fr);
+    grid-template-columns:
+        repeat(4, 1fr);
 
     gap: 15px;
 
@@ -239,65 +415,67 @@ h1 span {
 .time-box {
     padding: 25px 10px;
 
-    border-radius: 18px;
-
     background:
         linear-gradient(
             145deg,
-            rgba(0, 40, 15, 0.8),
-            rgba(0, 10, 4, 0.8)
+            rgba(0,40,15,.82),
+            rgba(0,10,4,.85)
         );
 
-    border: 1px solid rgba(82,255,130,0.5);
+    border:
+        1px solid rgba(82,255,130,.5);
+
+    border-radius: 18px;
 
     backdrop-filter: blur(10px);
 
     box-shadow:
-        0 0 25px rgba(0,255,80,0.12),
-        inset 0 0 25px rgba(0,255,80,0.05);
+        0 0 25px rgba(0,255,80,.12);
 
-    transition: 0.3s;
+    transition: .3s;
 }
 
 .time-box:hover {
-    transform: translateY(-8px) scale(1.03);
+    transform:
+        translateY(-8px)
+        scale(1.03);
 
-    border-color: #5cff88;
+    border-color: #55ff84;
 
     box-shadow:
-        0 0 35px rgba(0,255,80,0.35);
+        0 0 40px rgba(0,255,80,.35);
 }
 
 .number {
     display: block;
 
-    font-size: clamp(38px, 6vw, 65px);
+    color: #63ff8c;
+
+    font-size: clamp(38px,6vw,65px);
 
     font-weight: 1000;
 
-    color: #65ff8c;
-
     text-shadow:
         0 0 12px #00ff55,
-        0 0 30px rgba(0,255,80,0.5);
+        0 0 30px rgba(0,255,80,.6);
 }
 
 .label {
-    display: block;
+    color: #a8cbb2;
 
-    margin-top: 5px;
-
-    font-size: 11px;
+    font-size: 10px;
 
     letter-spacing: 4px;
-
-    color: #a8cbb2;
 }
 
-/* ================= BUTTON ================= */
+
+/* =====================================================
+   BUTTONS
+===================================================== */
 
 .buttons {
     display: flex;
+
     justify-content: center;
 
     gap: 15px;
@@ -316,18 +494,16 @@ h1 span {
 
     font-weight: 900;
 
-    letter-spacing: 1px;
-
-    transition: 0.3s;
+    transition: .3s;
 }
 
 .primary {
-    color: #031008;
-
     background: #55ff84;
 
+    color: #031008;
+
     box-shadow:
-        0 0 20px rgba(0,255,80,0.5);
+        0 0 25px rgba(0,255,80,.45);
 }
 
 .primary:hover {
@@ -336,53 +512,67 @@ h1 span {
     transform: translateY(-4px);
 
     box-shadow:
-        0 0 40px rgba(0,255,80,0.8);
+        0 0 45px rgba(0,255,80,.8);
 }
 
 .secondary {
     color: white;
 
-    border: 1px solid #55ff84;
+    border:
+        1px solid #55ff84;
 
-    background: rgba(0,20,8,0.4);
+    background:
+        rgba(0,20,8,.5);
 }
 
 .secondary:hover {
     background: #55ff84;
+
     color: #031008;
 }
 
-/* ================= ENERGY LINE ================= */
+
+/* =====================================================
+   ENERGY LINE
+===================================================== */
 
 .energy-line {
     position: absolute;
 
     bottom: 0;
+
     left: 0;
 
     width: 100%;
+
     height: 2px;
 
-    background: #54ff83;
+    background: #55ff84;
 
     box-shadow:
         0 0 10px #00ff55,
         0 0 30px #00ff55;
 
-    animation: pulse 2s infinite alternate;
+    animation:
+        energyPulse 1.5s infinite alternate;
 }
 
-@keyframes pulse {
+@keyframes energyPulse {
+
     from {
-        opacity: 0.3;
+        opacity: .3;
     }
 
     to {
         opacity: 1;
     }
+
 }
 
-/* ================= SECTIONS ================= */
+
+/* =====================================================
+   SECTIONS
+===================================================== */
 
 section {
     padding: 110px 7%;
@@ -393,111 +583,65 @@ section {
 .section-title {
     text-align: center;
 
-    color: #61ff8b;
+    color: #60ff8b;
 
-    font-size: clamp(32px, 5vw, 55px);
+    font-size: clamp(34px,5vw,55px);
 
     margin-bottom: 20px;
 
     text-shadow:
-        0 0 20px rgba(0,255,80,0.5);
+        0 0 20px rgba(0,255,80,.5);
 }
 
 .section-text {
-    text-align: center;
-
     max-width: 700px;
 
     margin: 0 auto 60px;
 
-    color: #b8c9bd;
+    text-align: center;
+
+    color: #b7c9bc;
 
     line-height: 1.8;
 }
 
-/* ================= TRAILER ================= */
 
-.trailer-box {
+/* =====================================================
+   TRAILER
+===================================================== */
+
+.trailer-container {
     max-width: 1000px;
-
-    height: 500px;
 
     margin: auto;
 
     border-radius: 25px;
 
-    border: 1px solid rgba(80,255,130,0.4);
-
-    background:
-        linear-gradient(
-            135deg,
-            rgba(0,35,12,0.85),
-            rgba(0,5,2,0.95)
-        );
-
-    display: flex;
-    justify-content: center;
-    align-items: center;
-
-    text-align: center;
-
-    box-shadow:
-        0 0 40px rgba(0,255,80,0.15);
-
     overflow: hidden;
 
-    position: relative;
-}
+    border:
+        1px solid rgba(80,255,130,.4);
 
-.trailer-box::before {
-    content: "";
-
-    position: absolute;
-
-    width: 250px;
-    height: 250px;
-
-    border-radius: 50%;
-
-    background: #00ff55;
-
-    filter: blur(100px);
-
-    opacity: 0.12;
-}
-
-.play-button {
-    width: 90px;
-    height: 90px;
-
-    border-radius: 50%;
-
-    background: #55ff84;
-
-    color: #031008;
-
-    display: flex;
-    align-items: center;
-    justify-content: center;
-
-    font-size: 35px;
-
-    margin: 0 auto 20px;
-
-    cursor: pointer;
+    background: #000;
 
     box-shadow:
-        0 0 25px #00ff55,
-        0 0 60px rgba(0,255,80,0.5);
-
-    transition: 0.3s;
+        0 0 40px rgba(0,255,80,.15);
 }
 
-.play-button:hover {
-    transform: scale(1.12);
+video {
+    display: block;
+
+    width: 100%;
+
+    max-height: 600px;
+
+    background: black;
 }
 
-/* ================= CHARACTER CARDS ================= */
+
+/* =====================================================
+   HERO CARDS
+===================================================== */
 
 .cards {
     max-width: 1100px;
@@ -507,104 +651,151 @@ section {
     display: grid;
 
     grid-template-columns:
-        repeat(3, 1fr);
+        repeat(3,1fr);
 
     gap: 25px;
 }
 
 .card {
-    min-height: 300px;
-
-    padding: 35px 25px;
+    min-height: 390px;
 
     border-radius: 22px;
 
+    overflow: hidden;
+
     background:
-        linear-gradient(
-            145deg,
-            rgba(0,30,12,0.8),
-            rgba(0,8,3,0.9)
-        );
+        rgba(0,20,8,.8);
 
-    border: 1px solid rgba(82,255,130,0.3);
-
-    text-align: center;
-
-    transition: 0.3s;
+    border:
+        1px solid rgba(82,255,130,.3);
 
     backdrop-filter: blur(10px);
+
+    transition: .4s;
 }
 
 .card:hover {
-    transform: translateY(-10px);
+    transform:
+        translateY(-12px);
 
     border-color: #55ff84;
 
     box-shadow:
-        0 0 35px rgba(0,255,80,0.2);
+        0 0 35px rgba(0,255,80,.25);
 }
 
-.card-icon {
-    font-size: 60px;
+.card-image {
+    width: 100%;
 
-    margin-bottom: 20px;
+    height: 220px;
 
-    filter:
-        drop-shadow(0 0 10px #00ff55);
+    object-fit: cover;
+
+    display: block;
+}
+
+.card-content {
+    padding: 25px;
 }
 
 .card h3 {
     color: #60ff8b;
 
-    margin-bottom: 15px;
+    margin-bottom: 10px;
 
-    font-size: 22px;
+    font-size: 21px;
 }
 
 .card p {
-    color: #b5c8ba;
+    color: #aebfb3;
 
-    line-height: 1.7;
+    line-height: 1.6;
 }
 
-/* ================= NEWSLETTER ================= */
 
-.join {
+/* =====================================================
+   MUSIC BUTTON
+===================================================== */
+
+.music-button {
+    position: fixed;
+
+    bottom: 25px;
+
+    right: 25px;
+
+    width: 52px;
+
+    height: 52px;
+
+    border-radius: 50%;
+
+    border:
+        1px solid #55ff84;
+
+    background:
+        rgba(0,20,8,.8);
+
+    color: #55ff84;
+
+    font-size: 20px;
+
+    cursor: pointer;
+
+    z-index: 500;
+
+    box-shadow:
+        0 0 20px rgba(0,255,80,.3);
+
+    transition: .3s;
+}
+
+.music-button:hover {
+    background: #55ff84;
+
+    color: #031008;
+
+    transform: scale(1.1);
+}
+
+
+/* =====================================================
+   FINAL SECTION
+===================================================== */
+
+.final {
     text-align: center;
 
     background:
         radial-gradient(
             circle at center,
-            rgba(0,255,80,0.08),
+            rgba(0,255,80,.09),
             transparent 60%
         );
 }
 
-.join-box {
-    max-width: 700px;
+.final-box {
+    max-width: 750px;
 
     margin: auto;
 
-    padding: 50px 25px;
+    padding: 55px 25px;
 
     border-radius: 25px;
 
-    border: 1px solid rgba(80,255,130,0.3);
+    border:
+        1px solid rgba(80,255,130,.3);
 
-    background: rgba(0,15,6,0.7);
+    background:
+        rgba(0,15,6,.7);
 
     backdrop-filter: blur(10px);
 }
 
-.join-box p {
-    color: #b5c8ba;
 
-    margin: 20px 0 30px;
-
-    line-height: 1.7;
-}
-
-/* ================= FOOTER ================= */
+/* =====================================================
+   FOOTER
+===================================================== */
 
 footer {
     padding: 35px 20px;
@@ -613,7 +804,7 @@ footer {
 
     background: #010502;
 
-    color: #63756a;
+    color: #64776a;
 
     font-size: 13px;
 }
@@ -622,21 +813,49 @@ footer strong {
     color: #55ff84;
 }
 
-/* ================= RESPONSIVE ================= */
 
-@media (max-width: 800px) {
+/* =====================================================
+   SCROLL ANIMATION
+===================================================== */
+
+.reveal {
+    opacity: 0;
+
+    transform:
+        translateY(50px);
+
+    transition:
+        opacity .8s ease,
+        transform .8s ease;
+}
+
+.reveal.visible {
+    opacity: 1;
+
+    transform:
+        translateY(0);
+}
+
+
+/* =====================================================
+   RESPONSIVE
+===================================================== */
+
+@media(max-width:800px) {
 
     nav {
         padding: 20px 5%;
     }
 
     nav a {
-        margin-left: 15px;
-        font-size: 12px;
+        margin-left: 14px;
+
+        font-size: 11px;
     }
 
     .countdown {
-        grid-template-columns: repeat(2, 1fr);
+        grid-template-columns:
+            repeat(2,1fr);
     }
 
     .cards {
@@ -645,16 +864,9 @@ footer strong {
         max-width: 500px;
     }
 
-    .trailer-box {
-        height: 350px;
-    }
-
-    section {
-        padding: 80px 6%;
-    }
 }
 
-@media (max-width: 500px) {
+@media(max-width:500px) {
 
     nav {
         justify-content: center;
@@ -698,33 +910,64 @@ footer strong {
 
     .label {
         font-size: 8px;
+
         letter-spacing: 2px;
     }
 
-    .trailer-box {
-        height: 280px;
+    section {
+        padding: 80px 6%;
     }
 
-    .play-button {
-        width: 70px;
-        height: 70px;
-        font-size: 27px;
-    }
 }
+
 </style>
 </head>
 
+
 <body>
 
+
+<!-- =====================================================
+     INTRO
+===================================================== -->
+
+<div id="intro">
+
+    <div class="intro-content">
+
+        <div class="intro-small">
+            MARVEL STUDIOS
+        </div>
+
+        <div class="intro-title">
+            AVENGERS
+            <span>DOOMSDAY</span>
+        </div>
+
+        <div class="loading">
+            INITIATING COUNTDOWN
+        </div>
+
+        <div class="loading-line"></div>
+
+    </div>
+
+</div>
+
+
 <!-- BACKGROUND -->
+
 <div class="background"></div>
+
 <div class="glow"></div>
 
-<!-- PARTICLES -->
 <div class="particles" id="particles"></div>
 
 
-<!-- NAVIGATION -->
+<!-- =====================================================
+     NAV
+===================================================== -->
+
 <nav>
 
     <div class="logo">
@@ -732,21 +975,34 @@ footer strong {
     </div>
 
     <div>
-        <a href="#home">HOME</a>
-        <a href="#trailer">TRAILER</a>
-        <a href="#heroes">HEROES</a>
+
+        <a href="#home">
+            HOME
+        </a>
+
+        <a href="#trailer">
+            TRAILER
+        </a>
+
+        <a href="#heroes">
+            HEROES
+        </a>
+
     </div>
 
 </nav>
 
 
-<!-- HERO -->
+<!-- =====================================================
+     HERO
+===================================================== -->
+
 <main class="hero" id="home">
 
     <div class="hero-content">
 
         <div class="mini-title">
-            MARVEL STUDIOS
+            THE NEXT CHAPTER
         </div>
 
         <h1>
@@ -755,8 +1011,8 @@ footer strong {
         </h1>
 
         <p class="tagline">
-            The Avengers return for their next battle.
-            The countdown to Doomsday has begun.
+            The Avengers return for a battle unlike anything
+            they've faced before.
         </p>
 
 
@@ -765,23 +1021,62 @@ footer strong {
         <div class="countdown">
 
             <div class="time-box">
-                <span class="number" id="days">00</span>
-                <span class="label">DAYS</span>
+
+                <span
+                    class="number"
+                    id="days">
+                    00
+                </span>
+
+                <span class="label">
+                    DAYS
+                </span>
+
             </div>
 
-            <div class="time-box">
-                <span class="number" id="hours">00</span>
-                <span class="label">HOURS</span>
-            </div>
 
             <div class="time-box">
-                <span class="number" id="minutes">00</span>
-                <span class="label">MINUTES</span>
+
+                <span
+                    class="number"
+                    id="hours">
+                    00
+                </span>
+
+                <span class="label">
+                    HOURS
+                </span>
+
             </div>
 
+
             <div class="time-box">
-                <span class="number" id="seconds">00</span>
-                <span class="label">SECONDS</span>
+
+                <span
+                    class="number"
+                    id="minutes">
+                    00
+                </span>
+
+                <span class="label">
+                    MINUTES
+                </span>
+
+            </div>
+
+
+            <div class="time-box">
+
+                <span
+                    class="number"
+                    id="seconds">
+                    00
+                </span>
+
+                <span class="label">
+                    SECONDS
+                </span>
+
             </div>
 
         </div>
@@ -789,126 +1084,156 @@ footer strong {
 
         <div class="buttons">
 
-            <a href="#trailer" class="button primary">
+            <a
+                href="#trailer"
+                class="button primary">
+
                 WATCH TRAILER
+
             </a>
 
-            <a href="#heroes" class="button secondary">
-                MEET THE HEROES
+
+            <a
+                href="#heroes"
+                class="button secondary">
+
+                HEROES
+
             </a>
 
         </div>
 
     </div>
+
 
     <div class="energy-line"></div>
 
 </main>
 
 
-<!-- TRAILER -->
+<!-- =====================================================
+     TRAILER
+===================================================== -->
 
-<section id="trailer">
+<section id="trailer" class="reveal">
 
     <h2 class="section-title">
-        THE NEXT BATTLE
+        OFFICIAL TRAILER
     </h2>
 
     <p class="section-text">
-        The Avengers are preparing for a battle that could
-        change everything. The future of the universe hangs
-        in the balance.
+        Experience the next Avengers adventure.
     </p>
 
 
-    <div class="trailer-box">
+    <div class="trailer-container">
 
-        <div>
+        <video
+            controls
+            poster="avengers-bg.jpg">
 
-            <div class="play-button" onclick="trailerMessage()">
-                ▶
-            </div>
+            <source
+                src="trailer.mp4"
+                type="video/mp4">
 
-            <h3>
-                TRAILER
-            </h3>
+            Your browser does not support video.
 
-            <p style="color:#78917f;margin-top:10px;">
-                Trailer placeholder
-            </p>
-
-        </div>
+        </video>
 
     </div>
 
 </section>
 
 
-<!-- HEROES -->
+<!-- =====================================================
+     HEROES
+===================================================== -->
 
-<section id="heroes">
+<section id="heroes" class="reveal">
 
     <h2 class="section-title">
-        THE AVENGERS
+        EARTH'S MIGHTIEST HEROES
     </h2>
 
     <p class="section-text">
-        Earth's mightiest heroes stand together once again.
+        The heroes prepare to face the coming threat.
     </p>
 
 
     <div class="cards">
 
+
+        <!-- CAPTAIN AMERICA -->
+
         <div class="card">
 
-            <div class="card-icon">
-                🛡️
+            <img
+                src="captain-america.jpg"
+                class="card-image"
+                alt="Captain America">
+
+            <div class="card-content">
+
+                <h3>
+                    CAPTAIN AMERICA
+                </h3>
+
+                <p>
+                    Courage, leadership and an unbreakable
+                    determination to protect the world.
+                </p>
+
             </div>
-
-            <h3>
-                CAPTAIN AMERICA
-            </h3>
-
-            <p>
-                A symbol of courage, leadership and hope
-                standing against impossible odds.
-            </p>
 
         </div>
 
 
+        <!-- THOR -->
+
         <div class="card">
 
-            <div class="card-icon">
-                ⚡
+            <img
+                src="thor.jpg"
+                class="card-image"
+                alt="Thor">
+
+            <div class="card-content">
+
+                <h3>
+                    THOR
+                </h3>
+
+                <p>
+                    The God of Thunder brings his power
+                    to the fight against the coming threat.
+                </p>
+
             </div>
-
-            <h3>
-                THOR
-            </h3>
-
-            <p>
-                The God of Thunder returns with the power
-                to face an enemy of unimaginable strength.
-            </p>
 
         </div>
 
 
+        <!-- IRON MAN -->
+
         <div class="card">
 
-            <div class="card-icon">
-                🦾
+            <img
+                src="iron-man.jpg"
+                class="card-image"
+                alt="Iron Man">
+
+            <div class="card-content">
+
+                <h3>
+                    IRON MAN
+                </h3>
+
+                <p>
+                    Genius, technology and determination
+                    combine when the Avengers need a plan.
+                </p>
+
             </div>
-
-            <h3>
-                IRON MAN
-            </h3>
-
-            <p>
-                Genius, technology and determination combine
-                when the Avengers need a plan.
-            </p>
 
         </div>
 
@@ -917,23 +1242,34 @@ footer strong {
 </section>
 
 
-<!-- JOIN -->
+<!-- =====================================================
+     FINAL
+===================================================== -->
 
-<section class="join">
+<section class="final reveal">
 
-    <div class="join-box">
+    <div class="final-box">
 
         <h2 class="section-title">
-            READY FOR DOOMSDAY?
+            ARE YOU READY?
         </h2>
 
-        <p>
-            The clock is ticking. Stay tuned and prepare
-            for the next Avengers adventure.
+        <p class="section-text">
+
+            The clock is ticking.
+
+            The Avengers are assembling.
+
+            Doomsday is coming.
+
         </p>
 
-        <a href="#home" class="button primary">
-            BACK TO COUNTDOWN
+        <a
+            href="#home"
+            class="button primary">
+
+            RETURN TO COUNTDOWN
+
         </a>
 
     </div>
@@ -941,25 +1277,74 @@ footer strong {
 </section>
 
 
+<!-- =====================================================
+     MUSIC
+===================================================== -->
+
+<audio
+    id="music"
+    loop>
+
+    <source
+        src="music.mp3"
+        type="audio/mpeg">
+
+</audio>
+
+
+<button
+    class="music-button"
+    id="musicButton"
+    onclick="toggleMusic()">
+
+    🔇
+
+</button>
+
+
 <!-- FOOTER -->
 
 <footer>
 
-    Fan-made Avengers: Doomsday countdown website.
+    Fan-made Avengers: Doomsday website.
 
     <br><br>
 
-    <strong>NOT AFFILIATED WITH MARVEL STUDIOS</strong>
+    <strong>
+        NOT AFFILIATED WITH MARVEL STUDIOS
+    </strong>
 
 </footer>
 
 
 <script>
 
-/* ================= COUNTDOWN ================= */
+/* =====================================================
+   INTRO
+===================================================== */
+
+window.addEventListener("load", function() {
+
+    setTimeout(function() {
+
+        document
+            .getElementById("intro")
+            .classList
+            .add("hide");
+
+    }, 2500);
+
+});
+
+
+/* =====================================================
+   COUNTDOWN
+===================================================== */
 
 const releaseDate =
-    new Date("December 18, 2026 00:00:00").getTime();
+    new Date(
+        "December 18, 2026 00:00:00"
+    ).getTime();
 
 
 function updateCountdown() {
@@ -974,11 +1359,15 @@ function updateCountdown() {
     if (difference <= 0) {
 
         document.getElementById("days").textContent = "00";
+
         document.getElementById("hours").textContent = "00";
+
         document.getElementById("minutes").textContent = "00";
+
         document.getElementById("seconds").textContent = "00";
 
         return;
+
     }
 
 
@@ -992,7 +1381,8 @@ function updateCountdown() {
     const hours =
         Math.floor(
             (difference %
-            (1000 * 60 * 60 * 24)) /
+            (1000 * 60 * 60 * 24))
+            /
             (1000 * 60 * 60)
         );
 
@@ -1000,7 +1390,8 @@ function updateCountdown() {
     const minutes =
         Math.floor(
             (difference %
-            (1000 * 60 * 60)) /
+            (1000 * 60 * 60))
+            /
             (1000 * 60)
         );
 
@@ -1008,40 +1399,67 @@ function updateCountdown() {
     const seconds =
         Math.floor(
             (difference %
-            (1000 * 60)) /
+            (1000 * 60))
+            /
             1000
         );
 
 
-    document.getElementById("days").textContent =
-        String(days).padStart(2, "0");
+    document.getElementById("days")
+        .textContent =
+        String(days)
+        .padStart(2,"0");
 
-    document.getElementById("hours").textContent =
-        String(hours).padStart(2, "0");
 
-    document.getElementById("minutes").textContent =
-        String(minutes).padStart(2, "0");
+    document.getElementById("hours")
+        .textContent =
+        String(hours)
+        .padStart(2,"0");
 
-    document.getElementById("seconds").textContent =
-        String(seconds).padStart(2, "0");
+
+    document.getElementById("minutes")
+        .textContent =
+        String(minutes)
+        .padStart(2,"0");
+
+
+    document.getElementById("seconds")
+        .textContent =
+        String(seconds)
+        .padStart(2,"0");
+
 }
 
 
 updateCountdown();
 
-setInterval(updateCountdown, 1000);
+setInterval(
+    updateCountdown,
+    1000
+);
 
 
-/* ================= PARTICLES ================= */
+/* =====================================================
+   PARTICLES
+===================================================== */
 
 const particles =
-    document.getElementById("particles");
+    document.getElementById(
+        "particles"
+    );
 
 
-for (let i = 0; i < 45; i++) {
+for (
+    let i = 0;
+    i < 55;
+    i++
+) {
 
     const particle =
-        document.createElement("div");
+        document.createElement(
+            "div"
+        );
+
 
     particle.className =
         "particle";
@@ -1056,25 +1474,108 @@ for (let i = 0; i < 45; i++) {
 
 
     particle.style.animationDuration =
-        (5 + Math.random() * 7) + "s";
+        5 +
+        Math.random() * 8 +
+        "s";
 
 
-    particle.style.opacity =
-        Math.random();
+    particles.appendChild(
+        particle
+    );
 
-
-    particles.appendChild(particle);
 }
 
 
-/* ================= TRAILER ================= */
+/* =====================================================
+   SCROLL REVEAL
+===================================================== */
 
-function trailerMessage() {
+const observer =
+    new IntersectionObserver(
+        function(entries) {
 
-    alert(
-        "🎬 Trailer section ready!\n\n" +
-        "You can add your official trailer video here."
+            entries.forEach(
+                function(entry) {
+
+                    if (
+                        entry.isIntersecting
+                    ) {
+
+                        entry.target
+                            .classList
+                            .add("visible");
+
+                    }
+
+                }
+            );
+
+        },
+        {
+            threshold: 0.15
+        }
     );
+
+
+document
+    .querySelectorAll(".reveal")
+    .forEach(
+        function(element) {
+
+            observer.observe(
+                element
+            );
+
+        }
+    );
+
+
+/* =====================================================
+   MUSIC
+===================================================== */
+
+const music =
+    document.getElementById(
+        "music"
+    );
+
+const musicButton =
+    document.getElementById(
+        "musicButton"
+    );
+
+
+function toggleMusic() {
+
+    if (
+        music.paused
+    ) {
+
+        music.play()
+            .then(function() {
+
+                musicButton.textContent =
+                    "🔊";
+
+            })
+            .catch(function() {
+
+                alert(
+                    "Add your music.mp3 file to the website folder first."
+                );
+
+            });
+
+    }
+
+    else {
+
+        music.pause();
+
+        musicButton.textContent =
+            "🔇";
+
+    }
 
 }
 
