@@ -1,0 +1,639 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Avengers: Doomsday | Countdown</title>
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: Arial, Helvetica, sans-serif;
+            color: white;
+            background: #020b05;
+            overflow-x: hidden;
+        }
+
+        /* =========================
+           BACKGROUND
+        ========================= */
+
+        .background {
+            position: fixed;
+            inset: 0;
+            z-index: -3;
+
+            background-image:
+                linear-gradient(
+                    rgba(0, 15, 7, 0.55),
+                    rgba(0, 5, 2, 0.88)
+                ),
+                url("avengers-bg.jpg");
+
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+        }
+
+        .green-glow {
+            position: fixed;
+            inset: 0;
+            z-index: -2;
+            pointer-events: none;
+
+            background:
+                radial-gradient(
+                    circle at 50% 35%,
+                    rgba(0, 255, 80, 0.16),
+                    transparent 45%
+                );
+        }
+
+        /* =========================
+           NAVBAR
+        ========================= */
+
+        nav {
+            width: 100%;
+            padding: 20px 7%;
+
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+
+            position: absolute;
+            top: 0;
+            left: 0;
+
+            z-index: 10;
+        }
+
+        .logo {
+            font-size: 24px;
+            font-weight: 900;
+            letter-spacing: 2px;
+            color: #65ff91;
+
+            text-shadow:
+                0 0 10px #00ff55,
+                0 0 25px rgba(0, 255, 85, 0.6);
+        }
+
+        nav a {
+            color: white;
+            text-decoration: none;
+            margin-left: 25px;
+            font-weight: bold;
+            transition: 0.3s;
+        }
+
+        nav a:hover {
+            color: #52ff87;
+            text-shadow: 0 0 10px #00ff55;
+        }
+
+        /* =========================
+           HERO
+        ========================= */
+
+        .hero {
+            min-height: 100vh;
+
+            display: flex;
+            justify-content: center;
+            align-items: center;
+
+            text-align: center;
+            padding: 100px 20px 60px;
+        }
+
+        .hero-content {
+            max-width: 1000px;
+            width: 100%;
+        }
+
+        .small-title {
+            color: #61ff8d;
+            font-size: 16px;
+            font-weight: bold;
+            letter-spacing: 5px;
+            margin-bottom: 15px;
+
+            text-shadow: 0 0 15px #00ff55;
+        }
+
+        h1 {
+            font-size: clamp(55px, 10vw, 130px);
+            line-height: 0.9;
+            font-weight: 1000;
+            letter-spacing: -5px;
+
+            color: white;
+
+            text-shadow:
+                0 0 10px #00ff55,
+                0 0 25px rgba(0, 255, 85, 0.7),
+                0 0 60px rgba(0, 255, 85, 0.4);
+        }
+
+        h1 span {
+            display: block;
+            color: #48ff7b;
+        }
+
+        .subtitle {
+            margin: 30px auto;
+            max-width: 650px;
+
+            color: #d6ffe0;
+            font-size: 18px;
+            line-height: 1.6;
+        }
+
+        /* =========================
+           COUNTDOWN
+        ========================= */
+
+        .countdown {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 15px;
+
+            max-width: 800px;
+            margin: 40px auto;
+        }
+
+        .time-box {
+            padding: 25px 10px;
+
+            background: rgba(0, 20, 8, 0.75);
+            border: 1px solid rgba(70, 255, 120, 0.5);
+
+            border-radius: 15px;
+
+            backdrop-filter: blur(8px);
+
+            box-shadow:
+                0 0 20px rgba(0, 255, 80, 0.12),
+                inset 0 0 20px rgba(0, 255, 80, 0.04);
+
+            transition: 0.3s;
+        }
+
+        .time-box:hover {
+            transform: translateY(-7px);
+
+            border-color: #52ff87;
+
+            box-shadow:
+                0 0 25px rgba(0, 255, 80, 0.35);
+        }
+
+        .number {
+            display: block;
+
+            font-size: clamp(35px, 6vw, 60px);
+            font-weight: 900;
+
+            color: #62ff8c;
+
+            text-shadow: 0 0 15px #00ff55;
+        }
+
+        .label {
+            font-size: 12px;
+            letter-spacing: 3px;
+            color: #b9d8c1;
+        }
+
+        /* =========================
+           BUTTON
+        ========================= */
+
+        .button {
+            display: inline-block;
+
+            padding: 14px 30px;
+
+            border: 1px solid #4dff80;
+            border-radius: 50px;
+
+            color: #07140a;
+            background: #4dff80;
+
+            text-decoration: none;
+            font-weight: 900;
+
+            box-shadow:
+                0 0 20px rgba(0, 255, 80, 0.4);
+
+            transition: 0.3s;
+        }
+
+        .button:hover {
+            background: white;
+            color: #041008;
+
+            transform: scale(1.05);
+
+            box-shadow:
+                0 0 35px rgba(0, 255, 80, 0.8);
+        }
+
+        /* =========================
+           INFO SECTION
+        ========================= */
+
+        section {
+            padding: 100px 7%;
+        }
+
+        .section-title {
+            text-align: center;
+            font-size: 42px;
+            margin-bottom: 20px;
+
+            color: #62ff8c;
+
+            text-shadow: 0 0 20px rgba(0, 255, 80, 0.5);
+        }
+
+        .section-description {
+            text-align: center;
+            max-width: 700px;
+            margin: 0 auto 50px;
+
+            color: #c6d7ca;
+            line-height: 1.7;
+        }
+
+        .cards {
+            max-width: 1100px;
+            margin: auto;
+
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 25px;
+        }
+
+        .card {
+            padding: 35px 25px;
+
+            background: rgba(0, 18, 7, 0.75);
+
+            border: 1px solid rgba(76, 255, 125, 0.3);
+            border-radius: 20px;
+
+            text-align: center;
+
+            backdrop-filter: blur(10px);
+
+            transition: 0.3s;
+        }
+
+        .card:hover {
+            transform: translateY(-8px);
+
+            border-color: #4dff80;
+
+            box-shadow:
+                0 0 30px rgba(0, 255, 80, 0.18);
+        }
+
+        .card-icon {
+            font-size: 45px;
+            margin-bottom: 20px;
+        }
+
+        .card h3 {
+            color: #63ff8c;
+            margin-bottom: 15px;
+        }
+
+        .card p {
+            color: #b8c9bd;
+            line-height: 1.6;
+        }
+
+        /* =========================
+           FOOTER
+        ========================= */
+
+        footer {
+            padding: 30px 20px;
+
+            text-align: center;
+
+            background: rgba(0, 8, 3, 0.9);
+
+            color: #78917e;
+            font-size: 13px;
+        }
+
+        footer span {
+            color: #52ff87;
+        }
+
+        /* =========================
+           RESPONSIVE
+        ========================= */
+
+        @media (max-width: 800px) {
+
+            nav {
+                padding: 18px 5%;
+            }
+
+            nav a {
+                margin-left: 12px;
+                font-size: 13px;
+            }
+
+            .countdown {
+                grid-template-columns: repeat(2, 1fr);
+                max-width: 500px;
+            }
+
+            .cards {
+                grid-template-columns: 1fr;
+                max-width: 500px;
+            }
+
+            section {
+                padding: 80px 6%;
+            }
+
+            .section-title {
+                font-size: 34px;
+            }
+        }
+
+        @media (max-width: 500px) {
+
+            nav {
+                justify-content: center;
+            }
+
+            .logo {
+                font-size: 19px;
+            }
+
+            nav div:last-child {
+                display: none;
+            }
+
+            .hero {
+                padding-top: 100px;
+            }
+
+            h1 {
+                font-size: 60px;
+                letter-spacing: -3px;
+            }
+
+            .subtitle {
+                font-size: 15px;
+            }
+
+            .countdown {
+                gap: 10px;
+            }
+
+            .time-box {
+                padding: 20px 5px;
+            }
+
+            .number {
+                font-size: 38px;
+            }
+
+            .label {
+                font-size: 9px;
+                letter-spacing: 2px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- BACKGROUND -->
+    <div class="background"></div>
+    <div class="green-glow"></div>
+
+    <!-- NAVIGATION -->
+    <nav>
+        <div class="logo">AVENGERS</div>
+
+        <div>
+            <a href="#home">HOME</a>
+            <a href="#info">INFO</a>
+        </div>
+    </nav>
+
+
+    <!-- HERO -->
+    <main id="home" class="hero">
+
+        <div class="hero-content">
+
+            <div class="small-title">
+                MARVEL STUDIOS PRESENTS
+            </div>
+
+            <h1>
+                AVENGERS
+                <span>DOOMSDAY</span>
+            </h1>
+
+            <p class="subtitle">
+                The next chapter of the Avengers is coming.
+                The countdown has begun.
+            </p>
+
+
+            <!-- COUNTDOWN -->
+            <div class="countdown">
+
+                <div class="time-box">
+                    <span class="number" id="days">00</span>
+                    <span class="label">DAYS</span>
+                </div>
+
+                <div class="time-box">
+                    <span class="number" id="hours">00</span>
+                    <span class="label">HOURS</span>
+                </div>
+
+                <div class="time-box">
+                    <span class="number" id="minutes">00</span>
+                    <span class="label">MINUTES</span>
+                </div>
+
+                <div class="time-box">
+                    <span class="number" id="seconds">00</span>
+                    <span class="label">SECONDS</span>
+                </div>
+
+            </div>
+
+
+            <a href="#info" class="button">
+                EXPLORE
+            </a>
+
+        </div>
+
+    </main>
+
+
+    <!-- INFO -->
+    <section id="info">
+
+        <h2 class="section-title">
+            DOOMSDAY IS COMING
+        </h2>
+
+        <p class="section-description">
+            Get ready for the next massive Avengers adventure.
+            Keep this page bookmarked and watch the countdown
+            as the release date gets closer.
+        </p>
+
+
+        <div class="cards">
+
+            <div class="card">
+
+                <div class="card-icon">⏳</div>
+
+                <h3>THE COUNTDOWN</h3>
+
+                <p>
+                    A live countdown automatically updates every
+                    second until the release date.
+                </p>
+
+            </div>
+
+
+            <div class="card">
+
+                <div class="card-icon">⚡</div>
+
+                <h3>THE AVENGERS</h3>
+
+                <p>
+                    Earth's mightiest heroes are preparing for
+                    another battle unlike anything before.
+                </p>
+
+            </div>
+
+
+            <div class="card">
+
+                <div class="card-icon">☠️</div>
+
+                <h3>DOOMSDAY</h3>
+
+                <p>
+                    A new threat approaches. The Avengers will
+                    have to face their greatest challenge yet.
+                </p>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- FOOTER -->
+    <footer>
+        Fan-made Avengers: Doomsday countdown website.
+        <br>
+        <span>Not affiliated with Marvel Studios.</span>
+    </footer>
+
+
+    <!-- JAVASCRIPT -->
+    <script>
+
+        // Release date
+        const releaseDate = new Date("December 18, 2026 00:00:00").getTime();
+
+
+        function updateCountdown() {
+
+            const now = new Date().getTime();
+
+            const difference = releaseDate - now;
+
+
+            if (difference <= 0) {
+
+                document.getElementById("days").textContent = "00";
+                document.getElementById("hours").textContent = "00";
+                document.getElementById("minutes").textContent = "00";
+                document.getElementById("seconds").textContent = "00";
+
+                return;
+            }
+
+
+            const days = Math.floor(
+                difference / (1000 * 60 * 60 * 24)
+            );
+
+            const hours = Math.floor(
+                (difference % (1000 * 60 * 60 * 24))
+                / (1000 * 60 * 60)
+            );
+
+            const minutes = Math.floor(
+                (difference % (1000 * 60 * 60))
+                / (1000 * 60)
+            );
+
+            const seconds = Math.floor(
+                (difference % (1000 * 60))
+                / 1000
+            );
+
+
+            document.getElementById("days").textContent =
+                String(days).padStart(2, "0");
+
+            document.getElementById("hours").textContent =
+                String(hours).padStart(2, "0");
+
+            document.getElementById("minutes").textContent =
+                String(minutes).padStart(2, "0");
+
+            document.getElementById("seconds").textContent =
+                String(seconds).padStart(2, "0");
+        }
+
+
+        // Update immediately
+        updateCountdown();
+
+
+        // Update every second
+        setInterval(updateCountdown, 1000);
+
+    </script>
+
+</body>
+</html>
